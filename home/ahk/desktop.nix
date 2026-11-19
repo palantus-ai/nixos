@@ -13,6 +13,7 @@
     common/optional/browsers
     common/optional/desktops # default is hyprland
     common/optional/development
+    common/optional/ai
     common/optional/comms
     common/optional/terminals
     common/optional/media
