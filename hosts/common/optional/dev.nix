@@ -8,5 +8,6 @@
     cargo
     gh # Github cli
     python3
+    file
   ];
 }

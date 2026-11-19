@@ -35,6 +35,17 @@
   #       ''[workspace 1]${obsidian}/bin/obsidian''
   # ];
 
+  # Expose the live xpp checkout as a user-profile command; edits are picked up immediately.
+  home.packages = [
+    (pkgs.writeShellApplication {
+      name = "xpp";
+      runtimeInputs = with pkgs; [ python3 git openssh ];
+      text = ''
+        exec python3 "$HOME/dev/xpp/cli/xpp.py" "$@"
+      '';
+    })
+  ];
+
   # gtk.gtk4.theme = null; # To avoid a warning
   xdg.userDirs.setSessionVariables = false;
   home.pointerCursor.enable = true;
