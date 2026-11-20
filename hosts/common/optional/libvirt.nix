@@ -4,6 +4,8 @@
 
   programs.virt-manager.enable = true;
 
+  # Use the NixOS-managed monolithic daemon, which receives the configured
+  # QEMU and swtpm packages. Do not enable virtqemud.socket independently.
   virtualisation.libvirtd = {
     enable = true;
     parallelShutdown = 3;
@@ -30,11 +32,6 @@
   #   # Ensure the directory exists before the service runs
   #   preStart = "mkdir -p /var/lib/libvirt/secrets";
   # };
-
-  systemd.sockets.virtqemud = {
-    description = "Libvirt QEMU local socket";
-    wantedBy = [ "sockets.target" ];
-  };
 
   environment.systemPackages = [
     pkgs.qemu_kvm
