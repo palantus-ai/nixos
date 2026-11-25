@@ -17,6 +17,8 @@
     file =
       let
         hostPath = "hosts/nixos/${osConfig.hostSpec.hostName}/niri";
+        hostMonitorOffPath = lib.custom.relativeToRoot "${hostPath}/monitor-off.kdl";
+        monitorOffConfig = if lib.pathExists hostMonitorOffPath then hostMonitorOffPath else ./monitor-off.kdl;
         finalConfig =
           lib.flatten [
             # order matters
@@ -26,11 +28,15 @@
               "${hostPath}/workspaces.kdl"
               "${hostPath}/startup.kdl"
             ])
-            ./binds.kdl
+            (builtins.replaceStrings
+              [ "#MONITOR_OFF_BINDING#" ]
+              [ (lib.readFile monitorOffConfig) ]
+              (lib.readFile ./binds.kdl)
+            )
             ./rules.kdl
             ./config.kdl
           ]
-          |> lib.concatMapStringsSep "\n" lib.readFile;
+          |> lib.concatMapStringsSep "\n" (file: if builtins.isPath file then lib.readFile file else file);
       in
       {
         ".config/niri/config.kdl".text = finalConfig;

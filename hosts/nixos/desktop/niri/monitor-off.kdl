@@ -1,0 +1,4 @@
+// The office host coordinates monitor power with the Home Assistant office light.
+Super+M hotkey-overlay-title="Office light and monitors off" {
+  spawn "office-light-manual-off"
+}

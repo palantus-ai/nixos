@@ -48,9 +48,6 @@ binds {
   Super+Ctrl+l hotkey-overlay-title="Focus monitor right" {
     focus-monitor-right
   }
-  Super+m hotkey-overlay-title="Monitors off" {
-    power-off-monitors
-  }
   // Super+Shift+n {spawn toggleMonitorsNonPrimary}
   Super+n {
     spawn "toggleMonitorZen"
@@ -377,6 +374,7 @@ binds {
   Super+Ctrl+O hotkey-overlay-title="Spawn file explorer" {
     spawn "yazi"
   }
+  // #MONITOR_OFF_BINDING#
  //
     // ========== Clipboard ==========
     //
